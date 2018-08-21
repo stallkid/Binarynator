@@ -1,54 +1,44 @@
 <?php
     // $data = $_POST['formData'];
-
+    // multOpSeed();
+    // binarySeed();
     calculateBinary(decbin(20), decbin(7));
     // convertDecimalToBinary($data);
-
+    
+    /**
+     * Converte Decimal para Binário e salva em JSON
+     *
+     * @param [array] $data
+     * @return void
+     */
     function convertDecimalToBinary($data) {
         $dec = $data;
         $bin = decbin($data);
-        saveBinary($dec, $bin);
-    }
-
-    function saveBinary($dec, $bin) {
         $data[] = [
             "decimal" => $dec, "binary" => $bin
         ];
-        $fp = file_get_contents('./../database/data.json');
-        $tempArray = json_decode($fp);
-        $tempArray[] = $data;
-        $jsonData = json_encode($tempArray);
-        file_put_contents('./../database/data.json', $jsonData);
+        saveToJson($data, 'converter');
     }
-    
-    function calculateBinary($fBin, $sBin) {
-        $rSum = bindec($fBin) + bindec($sBin);
-        $rSub = bindec($fBin) - bindec($sBin);
-        $rDiv = bindec($fBin) / bindec($sBin);
-        $rMul = bindec($fBin) * bindec($sBin);
+    /**
+     * Salva o array em JSON
+     *
+     * @param [array] $value
+     * @param [string] $database
+     * @return void
+     */
+    function saveToJson($value, $database) {
+        
+        $fp = file_get_contents('./../database/'.$database.'.json');
+        $tempArray = json_decode($fp);
+        $tempArray[] = $value;
+        $jsonData = json_encode($tempArray);
+        file_put_contents('./../database/'.$database.'.json', $jsonData);
+    }
 
-        $data[] = [
-            "Sum" => [
-                "firstNumber" => $fBin,
-                "secondNumber" => $sBin,
-                "result" => decbin($rSum)
-            ], 
-            "Sub" => [
-                "firstNumber" => $fBin,
-                "secondNumber" => $sBin,
-                "total" => decbin($rSub)
-            ],
-            "Div" => [
-                "firstNumber" => $fBin,
-                "secondNumber" => $sBin,
-                "total" => decbin($rDiv)
-            ],
-            "Mul" => [
-                "firstNumber" => $fBin,
-                "secondNumber" => $sBin,
-                "total" => decbin($rMul)
-            ]
-        ];
+    function toJson($value) {
+        echo json_encode($value);
+    }
 
-        echo json_encode($data);
+    function dd($value) {
+        var_dump($value);
     }
