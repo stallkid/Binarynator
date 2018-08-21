@@ -71,7 +71,13 @@
         saveToJson($data, 'all-operations');
         // return $data;
     }
-
+    /**
+     * Somar de dois numeros em binario e decimal
+     *
+     * @param [int] $fBin
+     * @param [int] $sBin
+     * @return array
+     */
     function sumBinary($fBin, $sBin) {
         $rSum = bindec($fBin) + bindec($sBin);
         $data[] = [
@@ -88,7 +94,13 @@
         ];
         return $data;
     }
-
+    /**
+     * Subtração de dois numeros em binario e decimal
+     *
+     * @param [int] $fBin
+     * @param [int] $sBin
+     * @return array
+     */
     function subBinary($fBin, $sBin) {
         $rSub = bindec($fBin) - bindec($sBin);
         $data[] = [
@@ -105,7 +117,13 @@
         ];
         return $data;
     }
-
+    /**
+     * Divisão de dois numeros em binario e decimal
+     *
+     * @param [int] $fBin
+     * @param [int] $sBin
+     * @return array
+     */
     function divBinary($fBin, $sBin) {
         $rDiv = bindec($fBin) / bindec($sBin);
         $data[] = [
@@ -122,7 +140,13 @@
         ];
         return $data;
     }
-
+    /**
+     * Multiplicação de dois numeros em binario e decimal
+     *
+     * @param [int] $fBin
+     * @param [int] $sBin
+     * @return array
+     */
     function multBinary($fBin, $sBin) {
         $rMul = bindec($fBin) * bindec($sBin);
         $data[] = [
