@@ -1,4 +1,5 @@
 <?php    
+require_once './binaryControl.php';
     
     /**
      * Realiza as opearações de dois numero em decimal e binário

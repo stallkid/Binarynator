@@ -1,9 +1,9 @@
  
 loadAjax = function() {
     console.time('put in database');
-    $.getJSON('./database/data.json', function (request) {
-        console.log(request);
-
+    $('#table-content').html("");
+    $.getJSON('./database/converter.json', function (request) {
+        
         $.ajax({
             type: "POST",
             url: "php/binaryControl.php",
@@ -17,6 +17,8 @@ loadAjax = function() {
                 console.log('Success');
                 $('#dec').val('');
                 $('#send').prop('disabled', false);
+                writeAjax();
+
             },
             error: function (jqxhr, status, exception) {
                 console.log('Error');
@@ -26,6 +28,21 @@ loadAjax = function() {
             }
         });
     });
+},
+writeAjax = function () {
+    $.getJSON('./database/converter.json', function (request) {
+        var string = '';
+        for (let i = 0; i < request.length; i++) {
+            string += '<tr><td>' + JSON.stringify(request[i][0]['decimal']) + '</td>'
+                + '<td>' + JSON.stringify(request[i][0]['binary']) + '</td></tr>';
+        }
+        $('#table-content').append(string);
+    });
+}
+clearJson = function () {
+    $.post("./../php/clearJson.php"), function (data) {
+        console.log(data);
+    }
 }
  
 $(document).ready( function () {
@@ -33,6 +50,10 @@ $(document).ready( function () {
         e.preventDefault();
         loadAjax();
         $('#send').prop('disabled', true);
-    })
+    });
+    $('#clear-json').click( function (e) {
+        e.preventDefault();
+    });
+    writeAjax();
 });
  

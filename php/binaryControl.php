@@ -1,9 +1,9 @@
 <?php
-    // $data = $_POST['formData'];
+    $data = $_POST['formData'];
     // multOpSeed();
     // binarySeed();
-    calculateBinary(decbin(20), decbin(7));
-    // convertDecimalToBinary($data);
+    // calculateBinary(decbin(20), decbin(7));
+    convertDecimalToBinary($data);
     
     /**
      * Converte Decimal para Binário e salva em JSON
@@ -11,12 +11,13 @@
      * @param [array] $data
      * @return void
      */
-    function convertDecimalToBinary($data) {
-        $dec = $data;
-        $bin = decbin($data);
+    function convertDecimalToBinary($input) {
+        $dec = $input;
+        $bin = decbin($input);
         $data[] = [
             "decimal" => $dec, "binary" => $bin
         ];
+        echo json_encode($data[0]['binary']);
         saveToJson($data, 'converter');
     }
     /**

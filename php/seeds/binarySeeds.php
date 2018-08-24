@@ -1,5 +1,5 @@
 <?php
-
+    multOpSeed();
     /**
      * Seed de multiplicadores decimais e binários até 10
      *
@@ -11,22 +11,20 @@
         foreach ($ope as $mult) {
             for ($i=0; $i < 11; $i++) { 
                 $result = $mult * $i;
-                $decimal[] = [
+                $data[] = [
+                    "decimal" => [
                         "numero" => $mult,
                         "multiplicador" => $i,
                         "Resultado" => $result,
-                    ];
-                $binary[] = [
+                    ],
+                    "binary" => [
                         "numero" => decbin($mult),
                         "multiplicador" => decbin($i),
                         "Resultado" => decbin($result),
-                    ];
+                    ]
+                ];
             }
         }
-        $data[] = [
-            "decimal" => $decimal,
-            "binario" => $binary
-        ];
         // print_r($data);
         echo json_encode($data);
         saveToJson($data ,'mult-operations');   
@@ -47,5 +45,14 @@
         }
         echo json_encode($data);
         saveToJson($data);
+    }
+
+    function saveToJson($value, $database) {
+        
+        $fp = file_get_contents('./../../database/'.$database.'.json');
+        $tempArray = json_decode($fp);
+        $tempArray[] = $value;
+        $jsonData = json_encode($tempArray);
+        file_put_contents('./../../database/'.$database.'.json', $jsonData);
     }
     
