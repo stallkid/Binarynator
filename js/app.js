@@ -1,6 +1,5 @@
  
 loadAjax = function() {
-    console.time('put in database');
     $('#converter-content').html("");
     $.getJSON('./database/converter.json', function (request) {
         
@@ -14,31 +13,30 @@ loadAjax = function() {
             dataType: "json",
             success: function (response) {
                 alert($('#dec').val() + " = " + response);
-                console.log('Success');
+                console.log('Success: ' + response);
                 $('#dec').val('');
                 $('#send').prop('disabled', false);
                 writeAjax();
-
             },
             error: function (jqxhr, status, exception) {
                 console.log('Error');
                 $('#dec').val('');
                 $('#send').prop('disabled', false);
-                console.timeEnd('put in database');
             }
         });
     });
 },
 writeAjax = function () {
-    $.getJSON('./database/converter.json', function (request) {
+    $.getJSON('./database/converter.json', function (req) {
+        console.log(req);
         var string = '';
-        for (let i = 0; i < request.length; i++) {
-            string += '<tr><td>' + JSON.stringify(Number(request[i][0]['decimal'])) + '</td>'
-                + '<td>' + JSON.stringify(Number(request[i][0]['binary'])) + '</td></tr>';
+        for (let i = 0; i < req.length; i++) {
+            string += '<tr><td>' + JSON.stringify(Number(req[i][0]['decimal'])) + '</td>'
+                + '<td>' + JSON.stringify(Number(req[i][0]['binary'])) + '</td></tr>';
         }
         $('#converter-content').append(string);
     });
-}
+},
 clearConverterJson = function () {
     $.ajax({
         type: "POST",
@@ -54,7 +52,7 @@ clearConverterJson = function () {
             alert("Ocorreu um erro na operação...");
         }
     });
-}
+},
 clearAllContent = function () {
     $('#converter-content').html("");
     $('#operations-content').html("");

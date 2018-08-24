@@ -42,7 +42,7 @@
               <button id="clear-json" type="button" class="btn btn-primary">Apagar Tabela</button>
           </form>
           <hr>
-          <table class="table">
+          <table class="table table-bordered">
           <thead>
             <tr>
               <th>Decimal</th>
@@ -82,7 +82,7 @@
                   <label><input type="radio" name="optradio">Multiplicação</label>
                 </div>
               <hr>
-              <label for="first-numb">Primeiro Decimal:</label>
+              <label for="first-numb">Segundo Decimal:</label>
               <input class="form-control" type="text" name="first-numb" id="first-numb">
             </div>
           </form>

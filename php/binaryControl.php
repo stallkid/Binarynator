@@ -1,8 +1,6 @@
 <?php
     $data = $_POST['formData'];
-    // multOpSeed();
-    // binarySeed();
-    // calculateBinary(decbin(20), decbin(7));
+
     convertDecimalToBinary($data);
     
     /**
@@ -28,7 +26,6 @@
      * @return void
      */
     function saveToJson($value, $database) {
-        
         $fp = file_get_contents('./../database/'.$database.'.json');
         $tempArray = json_decode($fp);
         $tempArray[] = $value;
