@@ -10,5 +10,6 @@ function clearJson($database) {
         fwrite($fp,$txt);
         rewind($fp);
         fclose($fp);
+        clearstatcache();
         echo json_encode('success');
 }

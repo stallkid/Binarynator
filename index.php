@@ -42,18 +42,34 @@
               <button id="clear-json" type="button" class="btn btn-primary">Apagar Tabela</button>
           </form>
           <hr>
-          <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Decimal</th>
-              <th>Binário</th>
-            </tr>
-          </thead>
-          <tbody id="converter-content">
-          </tbody>
-          </table>
-        <ul id="demo">
-        </ul>
+          <div class="row">
+            <div class="col-md-6">
+              <span id="convert-time"></span>
+              <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Decimal</th>
+                  <th>Binário</th>
+                </tr>
+              </thead>
+              <tbody id="converter-content">
+              </tbody>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <span id="search-time"></span>
+              <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Decimal</th>
+                  <th>Binário</th>
+                </tr>
+              </thead>
+              <tbody id="search-content">
+              </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -67,23 +83,25 @@
               <input class="form-control" type="text" name="first-numb" id="first-numb">
               <hr>
                 <div class="radio">
-                  <label><input type="radio" name="optradio" checked>Todas Operações</label>
+                  <label><input type="radio" name="optradio" value="" checked>Todas Operações</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="optradio">Somatória</label>
+                  <label><input type="radio" name="optradio" value="+">Somatória</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="optradio">Subtração</label>
+                  <label><input type="radio" name="optradio" value="-">Subtração</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="optradio">Divisão</label>
+                  <label><input type="radio" name="optradio" value="/">Divisão</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="optradio">Multiplicação</label>
+                  <label><input type="radio" name="optradio" value="*">Multiplicação</label>
                 </div>
               <hr>
-              <label for="first-numb">Segundo Decimal:</label>
-              <input class="form-control" type="text" name="first-numb" id="first-numb">
+              <label for="second-numb">Segundo Decimal:</label>
+              <input class="form-control" type="text" name="second-numb" id="second-numb">
+              <hr>
+              <input id="send"class="btn btn-primary" type="submit" value="send">
             </div>
           </form>
         </div >
@@ -96,7 +114,7 @@
             <th>Primeiro Número</th>
             <th>Operação</th>
             <th>Segundo Número</th>
-            <th>Operação</th>
+            <th>Resultado</th>
           </tr>
         </thead>
         <tbody id="operations-content"></tbody>
