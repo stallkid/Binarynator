@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,11 +18,11 @@
 <div>
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a href="#page1" class="active nav-link" id="page1-link">Conversões</a></li>
           <li class="nav-item"><a href="#page2" class="nav-link" id="page2-link">Operações</a></li>
-          <li class="nav-item"><a href="#page3" class="nav-link" id="page3-link">Page 3</a></li>
+          <li class="nav-item"><a href="#page3" class="nav-link" id="page3-link">Tabuada</a></li>
         </ul>
       </div>
     </nav>
@@ -31,8 +30,8 @@
   <div id="main-content" class="container">
   <!-- CONTEUDO PRIMEIRA PAGINA -->
     <section id="page1">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+      <div class="row col-md-12">
+        <div class="col-md-6">
           <form id="convert-form">
               <div class="form-group">
                 <label for="dec">Número decimal:</label>
@@ -76,17 +75,14 @@
     <!-- CONTEUDO SEGUNDA PAGINA -->
     <section id="page2">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6">
           <form id="operation-form">
             <div class="form-group">
               <label for="first-numb">Primeiro Decimal:</label>
               <input class="form-control" type="text" name="first-numb" id="first-numb">
               <hr>
                 <div class="radio">
-                  <label><input type="radio" name="optradio" value="" checked>Todas Operações</label>
-                </div>
-                <div class="radio">
-                  <label><input type="radio" name="optradio" value="+">Somatória</label>
+                  <label><input type="radio" name="optradio" value="+" checked>Somatória</label>
                 </div>
                 <div class="radio">
                   <label><input type="radio" name="optradio" value="-">Subtração</label>
@@ -123,9 +119,57 @@
     </section>
     <!-- CONTEUDO TERCEIRA PAGINA -->
     <section id="page3">
-      <p>teste 3</p>
-    </section>
-  </div>
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <form id="table-form">
+          <div class="form-group">
+            <label for="number">Número decimal:</label>
+            <input id="number" class="form-control" name="number" type="text" autocomplete="off">
+          </div>
+            <input id="send"class="btn btn-primary" type="submit" value="send">
+            <button id="clear-mult-json" type="button" class="btn btn-primary">Apagar Tabela</button>
+        </form>
+      </div>
+
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+        <span id="table-calc-time"></span>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Base</th>
+                <th>Número</th>
+                <th>Operador</th>
+                <th>Multiplicador</th>
+                <th>resultado</th>
+              </tr>
+            </thead>
+            <tbody id="info-calc">
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6">
+        <span id="table-src-time"></span>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Base</th>
+                <th>Número</th>
+                <th>Operador</th>
+                <th>Multiplicador</th>
+                <th>resultado</th>
+              </tr>
+            </thead>
+            <tbody id="info-src">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </section>
+    
   
 </div>
 </body>

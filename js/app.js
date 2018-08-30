@@ -107,36 +107,118 @@ calculateAjax = function () {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            string += '<tr><td>'+ response[0]['first']['binary'] +'</td>'
-                + '<td>' + response[0]['operation'] + '</td>'
-                + '<td>' + response[0]['second']['binary'] + '</td>'
-                + '<td>' + response[0]['result']['result_bin'] + '</td></tr>';
-
+            var time = (t2 - t1);
+            for(var i = 0; i < response.length; i++) {
+                string += '<tr><td>(Decimal: ' + response[i]['first']['decimal'] + ' | Binario: ' + response[i]['first']['binary'] +')</td>'
+                    + '<td>' + response[i]['operation'] + '</td>'
+                    + '<td>(Decimal: ' + response[i]['second']['decimal'] + ' | Binario: ' + response[i]['second']['binary'] +')</td>'
+                    + '<td>(Decimal: ' + response[i]['result']['result_dec'] + ' | Binario: ' + response[i]['result']['result_bin'] +')</td></tr>';
+            }
             $('#operations-content').append(string);
         },
         error: function (jqxhr, status, exception) {
             
         }
     });
-}
+},
+// TABLE CALC OPERATIONS
+calculateTable = function () {
+    var t1 = performance.now();
+    $.ajax({
+        type: "POST",
+        url: "php/tableCalc.php",
+        data: {
+            number: $('#number').val(),
+        },
+        dataType: "json",
+        success: function (response) {
+            $('#info-calc').html("");
+            var t2 = performance.now();
+            var time = (t2 - t1);
+            var string = '';
+            for(var i=0;i<response.length;i++) {
+                string += '<tr>'
+                    + '<td> Decimal </td>'
+                    + '<td>' + response[i]['value']['decimal'] + '</td>'
+                    + '<td> x </td>'
+                    + '<td>' + response[i]['multiple']['decimal'] + '</td>'
+                    + '<td>' + response[i]['result']['decimal'] + '</td>'
+                    + '</tr>'
+            }
+            var timeMsg = '<b>A operação levou: ' + time.toFixed(2) +'ms</b>';
+            $('#table-calc-time').html(timeMsg)
+            $('#info-calc').append(string);
+        },
+        error: function (jqxhr, status, exception) {
+
+        }
+    });
+},
+searchTable = function () {
+    var t1 = performance.now();
+    $.getJSON('./database/mult-operations.json', function (req) {
+            $('#info-src').html("");
+            var data = req[0];
+            var field = $('#number').val()
+            var string = '';
+            for (let i = 0; i < data.length; i++) {
+                if (data[i]['decimal']['numero'] == field) {
+                    string += '<tr>'
+                    + '<td> Decimal </td>'
+                    + '<td>' + data[i]['decimal']['numero'] + '</td>'
+                    + '<td> x </td>'
+                    + '<td>' + data[i]['decimal']['multiplicador'] + '</td>'
+                    + '<td>' + data[i]['decimal']['Resultado'] + '</td>'
+                    + '</tr>';
+                }
+            }
+            var t2 = performance.now();
+            var time = (t2 - t1)
+            var timeMsg = '<b>A operação levou: ' + time.toFixed(2) + 'ms</b>';
+            $('#table-src-time').html(timeMsg);
+            $('#info-src').append(string);
+    });
+}   
+
+    clearTableCalc = function () {
+        $('#clear-mult-json').on('click', function(e) {
+            $('#info-src').html("");
+            $('#info-calc').html("");
+            $('#table-src-time').html("");
+            $('#table-calc-time').html("")
+            $('#number').val("");
+        });
+    }
 $(document).ready( function () {
+    clearTableCalc();
     // FORMULÁRIO DE CONVERSÃO
     $('#convert-form').submit( function (e) {
         e.preventDefault();
-        if ($('#dec') !== null) {
+        if ($('#dec').val() !== '') {
             loadAjax();
             searchBinaryInJson();
+            $('#send').prop('disabled', true);
         } else {
-            alert("Campo obrigatório");
-        }
-        
-        $('#send').prop('disabled', true);
+            alert("Campo Obrigatório!");
+        } 
     });
     // FORMULÁRIO DE OPERAÇÕES
     $('#operation-form').submit( function (e) {
         e.preventDefault();
-        if ($('#first-num') !== null && $('#second-num') !== null) {
+        if ($('#first-num').val() !== '' && $('#second-num').val() !== '') {
             calculateAjax();
+        } else {
+            alert("Campo Obrigatório!")
+        }
+    });
+    // FORMULÁRIO DE TABUADA
+    $('#table-form').submit( function (e) {
+        e.preventDefault();
+        if ($('#number').val() !== '') {
+            calculateTable() 
+            searchTable();
+        } else {
+            alert("Campo Obrigatório!");
         }
     });
     $('#clear-json').click( function (e) {
@@ -146,4 +228,3 @@ $(document).ready( function () {
     });
     writeAjax();
 });
- 
