@@ -136,7 +136,7 @@
       <div class="row">
         <div class="col-md-6">
         <span id="table-calc-time"></span>
-          <table class="table table-bordered">
+          <table class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Base</th>
@@ -153,7 +153,7 @@
 
         <div class="col-md-6">
         <span id="table-src-time"></span>
-          <table class="table table-bordered">
+          <table class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Base</th>

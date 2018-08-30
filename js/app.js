@@ -24,7 +24,7 @@ loadAjax = function() {
                 console.log('Success: ' + response);
                 $('#dec').val('');
                 $('#send').prop('disabled', false);
-                $('#convert-time').append(timeMsg)
+                $('#convert-time').html(timeMsg)
                 writeAjax();
                 
                 console.log("Calculo leva "+ (t2 - t1) +" milissegundos");
@@ -88,7 +88,7 @@ searchBinaryInJson = function () {
         var t4 = performance.now();
         time = (t4 - t3);
         timeMsg = '<p><b>A operação levou: ' + time.toFixed(2) + 'ms</b></p>';
-        $('#search-time').append(timeMsg);
+        $('#search-time').html(timeMsg);
         console.log("Busca leva " + time + " milissegundos");
     });
 },
@@ -107,7 +107,6 @@ calculateAjax = function () {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            var time = (t2 - t1);
             for(var i = 0; i < response.length; i++) {
                 string += '<tr><td>(Decimal: ' + response[i]['first']['decimal'] + ' | Binario: ' + response[i]['first']['binary'] +')</td>'
                     + '<td>' + response[i]['operation'] + '</td>'
@@ -143,7 +142,14 @@ calculateTable = function () {
                     + '<td> x </td>'
                     + '<td>' + response[i]['multiple']['decimal'] + '</td>'
                     + '<td>' + response[i]['result']['decimal'] + '</td>'
-                    + '</tr>'
+                    + '</tr>';
+                string += '<tr>'
+                    + '<td> Binário </td>'
+                    + '<td>' + response[i]['value']['binary'] + '</td>'
+                    + '<td> x </td>'
+                    + '<td>' + response[i]['multiple']['binary'] + '</td>'
+                    + '<td>' + response[i]['result']['binary'] + '</td>'
+                    + '</tr>';
             }
             var timeMsg = '<b>A operação levou: ' + time.toFixed(2) +'ms</b>';
             $('#table-calc-time').html(timeMsg)
@@ -170,6 +176,13 @@ searchTable = function () {
                     + '<td>' + data[i]['decimal']['multiplicador'] + '</td>'
                     + '<td>' + data[i]['decimal']['Resultado'] + '</td>'
                     + '</tr>';
+                    string += '<tr>'
+                        + '<td> Binário </td>'
+                        + '<td>' + data[i]['binary']['numero'] + '</td>'
+                        + '<td> x </td>'
+                        + '<td>' + data[i]['binary']['multiplicador'] + '</td>'
+                        + '<td>' + data[i]['binary']['Resultado'] + '</td>'
+                        + '</tr>';
                 }
             }
             var t2 = performance.now();
