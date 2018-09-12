@@ -139,6 +139,7 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
+                <th>#</th>
                 <th>Base</th>
                 <th>Número</th>
                 <th>Operador</th>

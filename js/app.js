@@ -132,11 +132,10 @@ calculateTable = function () {
         dataType: "json",
         success: function (response) {
             $('#info-calc').html("");
-            var t2 = performance.now();
-            var time = (t2 - t1);
             var string = '';
             for(var i=0;i<response.length;i++) {
                 string += '<tr>'
+                    + '<td>' + i + '</td>'
                     + '<td> Decimal </td>'
                     + '<td>' + response[i]['value']['decimal'] + '</td>'
                     + '<td> x </td>'
@@ -144,6 +143,7 @@ calculateTable = function () {
                     + '<td>' + response[i]['result']['decimal'] + '</td>'
                     + '</tr>';
                 string += '<tr>'
+                    + '<td>' + i + '</td>'
                     + '<td> Binário </td>'
                     + '<td>' + response[i]['value']['binary'] + '</td>'
                     + '<td> x </td>'
@@ -151,9 +151,12 @@ calculateTable = function () {
                     + '<td>' + response[i]['result']['binary'] + '</td>'
                     + '</tr>';
             }
+            var t2 = performance.now();
+            var time = (t2 - t1);
             var timeMsg = '<b>A operação levou: ' + time.toFixed(2) +'ms</b>';
             $('#table-calc-time').html(timeMsg)
             $('#info-calc').append(string);
+            
         },
         error: function (jqxhr, status, exception) {
 
@@ -167,7 +170,7 @@ searchTable = function () {
             var data = req[0];
             var field = $('#number').val()
             var string = '';
-            for (let i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 if (data[i]['decimal']['numero'] == field) {
                     string += '<tr>'
                     + '<td> Decimal </td>'
@@ -186,7 +189,7 @@ searchTable = function () {
                 }
             }
             var t2 = performance.now();
-            var time = (t2 - t1)
+            var time = (t2 - t1);
             var timeMsg = '<b>A operação levou: ' + time.toFixed(2) + 'ms</b>';
             $('#table-src-time').html(timeMsg);
             $('#info-src').append(string);
@@ -195,6 +198,7 @@ searchTable = function () {
 
     clearTableCalc = function () {
         $('#clear-mult-json').on('click', function(e) {
+            e.preventDefault();
             $('#info-src').html("");
             $('#info-calc').html("");
             $('#table-src-time').html("");
